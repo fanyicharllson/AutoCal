@@ -6,5 +6,11 @@
     .gradient-bg {
         @apply inset-0 bg-gradient-to-br from-white via-green-50 to-green-200;
     }
+    .btn-style {
+        @apply bg-green-600 text-white rounded-md shadow-md hover:bg-green-700 transition duration-300;
+    }
+    .border-btn-style {
+        @apply border-2 border-green-600 px-4 text-sm py-2 rounded-md text-green-600 transition duration-300;
+    }
 
 }

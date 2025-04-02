@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,13 +15,15 @@ export default function NotFoundPage() {
           Oops Sorry! Page Not available.
         </p>
         <div className="pt-4">
-          <button
-            className="btn flex items-center"
+          <motion.button
+            className="btn-style px-4 py-2 flex items-center"
             onClick={() => navigate("/")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <ArrowLeft />
             Back to home
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>
