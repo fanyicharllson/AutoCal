@@ -58,7 +58,7 @@ export function Modal({
         aria-labelledby="modal-title"
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 id="modal-title" className="text-xl font-semibold">
+          <h2 id="modal-title" className="text-xl font-semibold text-green-600">
             {title}
           </h2>
           <button
