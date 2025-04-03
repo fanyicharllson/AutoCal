@@ -1,6 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { X } from "lucide-react";
-import { motion } from "framer-motion";
+import Overlay from "./overlay";
 
 interface ModalProps {
   isOpen: boolean;
@@ -35,20 +35,11 @@ export function Modal({
   return (
     <>
       {/* Modal Backdrop */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
-          className="fixed inset-0 bg-black bg-opacity-30 transition-opacity duration-300 ease-in-out z-40"
-          onClick={onClose}
-        />
-      )}
+      <Overlay isOpen={isOpen} />
 
       {/* Modal */}
       <div
-        className={`fixed left-1/2 z-50 md:w-full w-[90%]  max-w-md -translate-x-1/2 rounded-lg bg-white p-6 shadow-lg transition-all duration-500 ease-in-out ${
+        className={`fixed left-1/2 z-50 md:w-full w-[90%]  max-w-md -translate-x-1/2 rounded-lg bg-white p-6 shadow-lg transition-all duration-500 ease-in-out max-h-[80vh] overflow-y-auto ${
           isOpen
             ? "top-1/2 -translate-y-1/2 opacity-100"
             : "-top-full opacity-0"
