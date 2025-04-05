@@ -20,7 +20,23 @@ function ShowModal({ isOpen, setIsOpen }: showModalProps) {
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedCategory(event.target.options[event.target.selectedIndex].text);
+    setSelectedCategory(event.target.value);
+    // setSelectedCategory(event.target.options[event.target.selectedIndex].text);
+    // setSelectCategory(event.target.value);
+  };
+  const getCategoryLabel = () => {
+    switch (selectedCategory) {
+      case "12":
+        return "Full Year (12 months)";
+      case "6":
+        return "Half Year (1–6 months)";
+      case "1":
+        return "Single Month (1 month)";
+      case "4":
+        return "Quarter Year (1–4 months)";
+      default:
+        return "Full Year (12 months)";
+    }
   };
 
   // Handle year input & validate
@@ -44,14 +60,15 @@ function ShowModal({ isOpen, setIsOpen }: showModalProps) {
     setLoading(true);
 
     setTimeout(() => {
-      const calendar = generateCalendar(
-        Number(year),
-        selectedCategory ? Number(selectedCategory) : 12
-      );
-      localStorage.setItem("calendarData", JSON.stringify(calendar)); // Pass data to next page
+      const monthsToGenerate = selectedCategory ? Number(selectedCategory) : 12;
+
+      const calendar = generateCalendar(Number(year), monthsToGenerate);
+      localStorage.setItem("calendarData", JSON.stringify(calendar));
+      localStorage.setItem("calenderYear", year);
       navigate("/calendar-view");
-    }, 2000);
+    }, 3000);
   };
+
   return (
     <>
       <Modal
@@ -101,11 +118,7 @@ function ShowModal({ isOpen, setIsOpen }: showModalProps) {
                 readOnly
                 placeholder="You will see your selected category here"
                 className="input text-sm bg-green-50"
-                value={
-                  selectedCategory
-                    ? `${selectedCategory} - ${year || "Year not entered"}`
-                    : `Full Year(12 months) - ${year || "Year not entered"}`
-                }
+                value={`${getCategoryLabel()} - ${year || "Year not entered"}`}
               />
             </div>
           </div>
@@ -140,11 +153,11 @@ function ShowModal({ isOpen, setIsOpen }: showModalProps) {
                 className="select cursor-pointer text-sm"
                 onChange={handleCategoryChange}
               >
-                <option>Select Catergory</option>
-                <option value={12}>Full Year(12 months)</option>
-                <option value={6}>Half Year(1-6 months)</option>
-                <option value={1}>Single Month(1 month)</option>
-                <option value={4}>Quater Year(1-4 months)</option>
+                <option value="">Select Catergory</option>
+                <option value="12">Full Year(12 months)</option>
+                <option value="6">Half Year(1-6 months)</option>
+                <option value="1">Single Month(1 month)</option>
+                <option value="4">Quater Year(1-4 months)</option>
               </select>
             </div>
           </div>
