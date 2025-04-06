@@ -32,6 +32,11 @@ function About() {
     console.log("Form submitted:", data);
     reset();
     setIsSubmitted(true);
+
+    // Hide the success message after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+    }, 3000);
   };
 
   return (
